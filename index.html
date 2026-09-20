@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2E7D32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="format-detection" content="telephone=no">
+    <title>Desa Tanjungsari - Kec. Banjarsari, Ciamis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="progressBar"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-brand" onclick="showPage('public')">
+                <div class="brand-logo"><i class="fas fa-building-columns"></i></div>
+                <div class="brand-text">
+                    <span>Desa Tanjungsari</span>
+                    <small>Kec. Banjarsari, Ciamis</small>
+                </div>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" onclick="showPage('public')">Beranda</a></li>
+                <li><a href="#profil" onclick="showPage('public')">Profil</a></li>
+                <li><a href="#visi" onclick="showPage('public')">Visi Misi</a></li>
+                <li><a href="#layanan" onclick="showPage('public')">Layanan</a></li>
+                <li><a href="#aduan" onclick="showPage('public')">Aduan</a></li>
+                <li><a href="#peta" onclick="showPage('public')">Peta</a></li>
+                <li><a href="#berita" onclick="showPage('public')">Berita</a></li>
+                <li class="menu-login-item"><a href="#" onclick="showPage('login')"><i class="fas fa-lock"></i> Login Admin</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <div id="page-public">
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="hero-logo float-anim">
+                    <i class="fas fa-building-columns"></i>
+                </div>
+                <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Kecamatan Banjarsari, Kabupaten Ciamis</div>
+                <h1>Selamat Datang di <span class="highlight">Desa Tanjungsari</span></h1>
+                <p>Desa yang maju, mandiri, dan sejahtera melalui pelayanan digital untuk masyarakat.</p>
+                <div class="hero-buttons">
+                    <a href="#layanan" class="btn btn-primary btn-ripple"><i class="fas fa-file-alt"></i> Layanan Desa</a>
+                    <a href="#aduan" class="btn btn-outline btn-ripple"><i class="fas fa-comments"></i> Aduan & Konsultasi</a>
+                </div>
+                <div class="hero-stats" id="heroStats">
+                    <div class="stat"><div class="stat-number" data-target="3571">0</div><div class="stat-label">Jiwa</div></div>
+                    <div class="stat"><div class="stat-number" data-target="1152">0</div><div class="stat-label">Kepala Keluarga</div></div>
+                    <div class="stat"><div class="stat-number" data-target="2">0</div><div class="stat-label">Dusun</div></div>
+                    <div class="stat"><div class="stat-number" data-target="4052">0</div><div class="stat-label">Luas (Ha)</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="profil">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Profil</span>
+                    <h2>Tentang <span class="highlight">Desa Tanjungsari</span></h2>
+                    <p>Mengenal lebih dekat desa kami</p>
+                </div>
+                <div class="profil-grid" id="profilGrid"></div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="visi">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Kepala Desa</span>
+                    <h2>Visi &amp; <span class="highlight">Misi</span></h2>
+                </div>
+                <div class="kades-wrapper">
+                    <div class="kades-card reveal-left">
+                        <div class="kades-foto"><i class="fas fa-user-tie"></i></div>
+                        <h3 id="kadesNama">Kepala Desa</h3>
+                        <p class="kades-jabatan">Kepala Desa Tanjungsari</p>
+                        <p class="kades-sambutan" id="kadesSambutan"></p>
+                    </div>
+                    <div class="visi-misi-wrapper">
+                        <div class="visi-card reveal-right">
+                            <div class="visi-icon"><i class="fas fa-eye"></i></div>
+                            <h3>Visi</h3>
+                            <p id="visiText"></p>
+                        </div>
+                        <div class="misi-card reveal-right">
+                            <div class="visi-icon"><i class="fas fa-bullseye"></i></div>
+                            <h3>Misi</h3>
+                            <ul id="misiList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="layanan">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Layanan</span>
+                    <h2>Layanan <span class="highlight">Surat & Administrasi</span></h2>
+                    <p>Klik layanan untuk langsung terhubung ke WhatsApp pegawai desa</p>
+                </div>
+                <div class="layanan-grid" id="layananGrid"></div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="aduan">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Aduan & Konsultasi</span>
+                    <h2>Sampaikan <span class="highlight">Aduan</span> Anda</h2>
+                    <p>Aduan akan langsung terkirim ke WhatsApp pegawai desa</p>
+                </div>
+                <div class="aduan-wrapper">
+                    <div class="aduan-form reveal-left">
+                        <h3><i class="fas fa-pen"></i> Form Aduan / Konsultasi</h3>
+                        <form id="aduanForm" onsubmit="kirimAduan(event)">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                                <input type="text" id="aduanNama" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Nomor WhatsApp</label>
+                                <input type="tel" id="aduanWA" placeholder="08xxxxxxxxxx" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tag"></i> Jenis Aduan</label>
+                                <select id="aduanJenis" required>
+                                    <option value="">Pilih jenis aduan...</option>
+                                    <option value="Pertanyaan Umum">Pertanyaan Umum</option>
+                                    <option value="Aduan Pelayanan">Aduan Pelayanan</option>
+                                    <option value="Konsultasi Surat">Konsultasi Surat</option>
+                                    <option value="Aduan Infrastruktur">Aduan Infrastruktur</option>
+                                    <option value="Aduan Kebersihan">Aduan Kebersihan</option>
+                                    <option value="Aduan Keamanan">Aduan Keamanan</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-comment"></i> Pesan</label>
+                                <textarea id="aduanPesan" rows="4" placeholder="Tulis aduan atau konsultasi Anda..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-ripple">
+                                <i class="fas fa-paper-plane"></i> Kirim ke WhatsApp Pegawai
+                            </button>
+                        </form>
+                    </div>
+                    <div class="aduan-info reveal-right">
+                        <h3><i class="fas fa-info-circle"></i> Alur Aduan</h3>
+                        <div class="alur-item">
+                            <div class="alur-num">1</div>
+                            <div class="alur-text"><h4>Isi Formulir</h4><p>Lengkapi data dan pesan aduan Anda</p></div>
+                        </div>
+                        <div class="alur-item">
+                            <div class="alur-num">2</div>
+                            <div class="alur-text"><h4>Klik Kirim</h4><p>Otomatis terhubung ke WhatsApp pegawai</p></div>
+                        </div>
+                        <div class="alur-item">
+                            <div class="alur-num">3</div>
+                            <div class="alur-text"><h4>Respon Cepat</h4><p>Pegawai akan merespon aduan Anda</p></div>
+                        </div>
+                        <div class="aduan-note">
+                            <i class="fas fa-shield-halved"></i>
+                            <span>Identitas Anda dilindungi. Aduan hanya akan diterima oleh pegawai desa.</span>
+                        </div>
+                        <div class="aduan-pegawai">
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <strong>Pegawai Desa</strong>
+                                <p>Admin Desa Tanjungsari</p>
+                                <a href="https://wa.me/6287890768114" target="_blank">0878-9076-8114</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="peta">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Peta</span>
+                    <h2>Lokasi <span class="highlight">Kantor Desa</span></h2>
+                </div>
+                <div class="peta-wrapper reveal">
+                    <div id="map"></div>
+                    <div class="peta-info">
+                        <h4><i class="fas fa-map-marker-alt"></i> Alamat Kantor</h4>
+                        <p id="infoAlamat"></p>
+                        <div class="peta-detail" id="infoKontak"></div>
+                        <a href="#" target="_blank" class="btn btn-primary btn-block mt-16 btn-ripple" id="btnGoogleMaps">
+                            <i class="fas fa-directions"></i> Buka di Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="berita">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Berita</span>
+                    <h2>Kabar <span class="highlight">Desa</span></h2>
+                </div>
+                <div class="berita-grid" id="beritaGrid"></div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <h3><i class="fas fa-building-columns"></i> Desa Tanjungsari</h3>
+                        <p>Desa yang maju, mandiri, dan sejahtera melalui pelayanan digital untuk masyarakat Kabupaten Ciamis.</p>
+                    </div>
+                    <div><h4>Menu</h4><ul><li><a href="#home">Beranda</a></li><li><a href="#profil">Profil</a></li><li><a href="#visi">Visi Misi</a></li><li><a href="#layanan">Layanan</a></li></ul></div>
+                    <div><h4>Layanan</h4><ul id="footerLayanan"></ul></div>
+                    <div><h4>Kontak</h4><ul id="footerKontak"></ul></div>
+                </div>
+                <div class="footer-bottom"><p>&copy; 2026 Desa Tanjungsari, Kec. Banjarsari, Kab. Ciamis.</p></div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="page-login" class="page-hidden">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-user-shield"></i>
+                    <h2>Login Admin</h2>
+                    <p>Masuk untuk mengelola website desa</p>
+                </div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-ripple">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </button>
+                    <p class="auth-switch"><a href="#" onclick="showPage('public')"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-admin" class="page-hidden">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard Admin</h2>
+                <div>
+                    <span id="adminGreeting">Halo Admin</span>
+                    <button class="btn-logout" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+                </div>
+            </div>
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="tab-dashboard"><i class="fas fa-home"></i> Dashboard</button>
+                <button class="admin-tab" data-tab="tab-layanan"><i class="fas fa-file-alt"></i> Layanan</button>
+                <button class="admin-tab" data-tab="tab-berita"><i class="fas fa-newspaper"></i> Berita</button>
+                <button class="admin-tab" data-tab="tab-profil"><i class="fas fa-info-circle"></i> Profil</button>
+                <button class="admin-tab" data-tab="tab-aduan"><i class="fas fa-inbox"></i> Aduan</button>
+            </div>
+
+            <div class="admin-panel active" id="tab-dashboard">
+                <div class="dash-stats" id="dashStats"></div>
+                <div class="dash-welcome">
+                    <h3><i class="fas fa-info-circle"></i> Selamat Datang, Admin!</h3>
+                    <p>Gunakan panel ini untuk mengelola konten website Desa Tanjungsari.</p>
+                </div>
+            </div>
+
+            <div class="admin-panel" id="tab-layanan">
+                <div class="admin-panel-header">
+                    <h3>Kelola Layanan Surat</h3>
+                    <button class="btn btn-sm btn-primary" onclick="showLayananForm()"><i class="fas fa-plus"></i> Tambah</button>
+                </div>
+                <div id="layananForm" class="admin-form" style="display:none;">
+                    <input type="hidden" id="layananId">
+                    <div class="form-group"><label>Icon (Font Awesome)</label><input type="text" id="layananIcon" placeholder="fa-home"></div>
+                    <div class="form-group"><label>Nama Layanan</label><input type="text" id="layananNama" placeholder="Surat Keterangan Domisili"></div>
+                    <div class="form-group"><label>Deskripsi</label><input type="text" id="layananDesc" placeholder="Untuk keperluan administrasi"></div>
+                    <button class="btn btn-primary" onclick="saveLayanan()">Simpan</button>
+                    <button class="btn btn-outline" onclick="hideForm('layananForm')">Batal</button>
+                </div>
+                <div id="adminLayananList" class="admin-list"></div>
+            </div>
+
+            <div class="admin-panel" id="tab-berita">
+                <div class="admin-panel-header">
+                    <h3>Kelola Berita</h3>
+                    <button class="btn btn-sm btn-primary" onclick="showBeritaForm()"><i class="fas fa-plus"></i> Tambah</button>
+                </div>
+                <div id="beritaForm" class="admin-form" style="display:none;">
+                    <input type="hidden" id="beritaId">
+                    <div class="form-group"><label>Judul</label><input type="text" id="beritaJudul"></div>
+                    <div class="form-group"><label>Tanggal</label><input type="date" id="beritaTanggal"></div>
+                    <div class="form-group"><label>Konten</label><textarea id="beritaKonten" rows="4"></textarea></div>
+                    <button class="btn btn-primary" onclick="saveBerita()">Simpan</button>
+                    <button class="btn btn-outline" onclick="hideForm('beritaForm')">Batal</button>
+                </div>
+                <div id="adminBeritaList" class="admin-list"></div>
+            </div>
+
+            <div class="admin-panel" id="tab-profil">
+                <div class="admin-panel-header"><h3>Profil Desa & Kepala Desa</h3></div>
+                <div class="admin-form">
+                    <div class="form-group"><label>Nama Kepala Desa</label><input type="text" id="editKadesNama"></div>
+                    <div class="form-group"><label>Sambutan</label><textarea id="editKadesSambutan" rows="3"></textarea></div>
+                    <div class="form-group"><label>Visi</label><textarea id="editVisi" rows="2"></textarea></div>
+                    <div class="form-group"><label>Misi (satu per baris)</label><textarea id="editMisi" rows="4"></textarea></div>
+                    <div class="form-group"><label>Alamat</label><textarea id="editAlamat" rows="2"></textarea></div>
+                    <div class="form-group"><label>Telepon</label><input type="text" id="editTelepon"></div>
+                    <div class="form-group"><label>WhatsApp</label><input type="text" id="editWA"></div>
+                    <div class="form-group"><label>Email</label><input type="email" id="editEmail"></div>
+                    <button class="btn btn-primary" onclick="saveProfil()">Simpan Semua</button>
+                </div>
+            </div>
+
+            <div class="admin-panel" id="tab-aduan">
+                <div class="admin-panel-header">
+                    <h3>Aduan Masuk</h3>
+                    <button class="btn btn-sm btn-outline" onclick="clearAduan()"><i class="fas fa-trash"></i> Hapus Semua</button>
+                </div>
+                <div id="adminAduanList" class="admin-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Berhasil!</span>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
